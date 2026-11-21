@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alles Wiegen – Dokumentation</title>
+  
+  <!-- AstroPaper Typografie: IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* AstroPaper Farbvariablen (Light & Dark Mode) */
+    :root,
+    html[data-theme="light"] {
+      --color-fill: #fbfbfb;
+      --color-text-base: #282728;
+      --color-accent: #006cac;
+      --color-card: #e6e6e6;
+      --color-card-muted: #cccccc;
+      --color-border: #ece9e9;
+    }
+
+    html[data-theme="dark"] {
+      --color-fill: #212737;
+      --color-text-base: #eaedf3;
+      --color-accent: #ff6b01;
+      --color-card: #343f60;
+      --color-card-muted: #8a3302;
+      --color-border: #ab4b08;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'IBM Plex Mono', monospace;
+      background-color: var(--color-fill);
+      color: var(--color-text-base);
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      max-width: 48rem; /* 768px - typische AstroPaper Lesebreite */
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem 1.25rem;
+      line-height: 1.75;
+      font-size: 1rem;
+    }
+
+    /* Header & Navigation */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.75rem 0;
+      border-bottom: 1px dashed var(--color-border);
+    }
+
+    .site-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--color-text-base);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .nav-actions a {
+      color: var(--color-text-base);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .nav-actions a:hover {
+      color: var(--color-accent);
+    }
+
+    /* Theme Toggle Button */
+    #theme-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-base);
+      display: flex;
+      align-items: center;
+      padding: 0.25rem;
+    }
+
+    #theme-btn:hover {
+      color: var(--color-accent);
+    }
+
+    /* Hero / Titelbereich */
+    .hero {
+      padding: 2.5rem 0 2rem 0;
+      border-bottom: 1px dashed var(--color-border);
+    }
+
+    .hero h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      opacity: 0.85;
+    }
+
+    /* Inhaltsverzeichnis (AstroPaper Box-Look) */
+    .toc-box {
+      margin: 2rem 0;
+      padding: 1.25rem 1.5rem;
+      border: 1px dashed var(--color-border);
+      background-color: rgba(128, 128, 128, 0.04);
+      border-radius: 4px;
+    }
+
+    .toc-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .toc-list {
+      list-style: none;
+    }
+
+    .toc-list li {
+      margin: 0.3rem 0;
+    }
+
+    .toc-list a {
+      color: var(--color-text-base);
+      text-decoration: none;
+      border-bottom: 1px dashed transparent;
+    }
+
+    .toc-list a:hover {
+      color: var(--color-accent);
+      border-bottom-color: var(--color-accent);
+    }
+
+    .toc-lvl-1 { font-weight: 600; margin-top: 0.5rem !important; }
+    .toc-lvl-2 { padding-left: 1.25rem; font-size: 0.95rem; }
+    .toc-lvl-3 { padding-left: 2.5rem; font-size: 0.9rem; opacity: 0.85; }
+
+    /* Überschriften & Content */
+    section {
+      padding: 2rem 0;
+      border-bottom: 1px dashed var(--color-border);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    h1.section-h1 {
+      font-size: 1.75rem;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+      scroll-margin-top: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      scroll-margin-top: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-accent);
+      scroll-margin-top: 1.5rem;
+    }
+
+    /* Anker-Symbol beim Hovern über Überschriften (typisch AstroPaper) */
+    h1.section-h1::before, h2::before, h3::before {
+      content: "# ";
+      color: var(--color-accent);
+      opacity: 0.6;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Platzhalter für Bilder/Hardware */
+    .media-placeholder {
+      border: 1px dashed var(--color-accent);
+      padding: 2rem;
+      text-align: center;
+      margin: 1.25rem 0;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px dashed var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    footer a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <a href="#" class="site-title">Alles Wiegen</a>
+    <div class="nav-actions">
+      <a href="#zusammenfassung">Doku</a>
+      <a href="#hardware">Hardware</a>
+      <!-- GitHub Link anpassen -->
+      <a href="https://github.com/DerMonaachh/Alles_Wiegen" target="_blank" rel="noopener">GitHub</a>
+      <button id="theme-btn" aria-label="Theme wechseln" title="Light/Dark Mode umschalten">
+        <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Titelbereich -->
+  <div class="hero">
+    <h1>Alles Wiegen</h1>
+    <p>App-Anleitung und Hardware-Übersicht.</p>
+  </div>
+
+  <!-- Inhaltsverzeichnis -->
+  <nav class="toc-box" aria-label="Inhaltsverzeichnis">
+    <span class="toc-title">Inhaltsverzeichnis</span>
+    <ul class="toc-list">
+      <li class="toc-lvl-1"><a href="#zusammenfassung">Zusammenfassung</a></li>
+      <li class="toc-lvl-2"><a href="#featues">Key Features</a></li>
+      <li class="toc-lvl-2"><a href="#versions">Versions-Übersicht</a></li>
+      <li class="toc-lvl-1"><a href="#app-nutzung">App-Nutzung</a></li>
+      <li class="toc-lvl-2"><a href="#waage-einrichten">Waage einrichten</a></li>
+      <li class="toc-lvl-2"><a href="#im-spiel">Im Spiel</a></li>
+      <li class="toc-lvl-3"><a href="#standard-spiel">Standard-Spiel</a></li>
+      <li class="toc-lvl-3"><a href="#bagel">Bagel</a></li>
+      <li class="toc-lvl-3"><a href="#items-modus">Items-Modus</a></li>
+      <li class="toc-lvl-2"><a href="#ergebnis">Ergebnis</a></li>
+      <li class="toc-lvl-3"><a href="#rangliste">Rangliste</a></li>
+      <li class="toc-lvl-3"><a href="#events">Events</a></li>
+      <li class="toc-lvl-2"><a href="#ergebnisse-bearbeiten">Ergebnisse bearbeiten</a></li>
+      <li class="toc-lvl-3"><a href="#ergebnisse-teilen">Ergebnisse teilen</a></li>
+      <li class="toc-lvl-2"><a href="#andere-optionen">Andere Optionen</a></li>
+
+      <li class="toc-lvl-1"><a href="#hardware">Hardware</a></li>
+      <li class="toc-lvl-2"><a href="#beschreibung">Beschreibung</a></li>
+      <li class="toc-lvl-2"><a href="#die-box">Die Box</a></li>
+      <li class="toc-lvl-2"><a href="#die-badges">Die Badges</a></li>
+      <li class="toc-lvl-3"><a href="#bilder">Bilder</a></li>
+      <li class="toc-lvl-3"><a href="#baender">Bänder</a></li>
+      <li class="toc-lvl-3"><a href="#saugnaepfe">Saugnäpfe</a></li>
+      <li class="toc-lvl-1"><a href="#daten">Datenschutz</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hauptinhalt -->
+  <main>
+
+    <!-- 1. Zusammenfassung -->
+    <section id="zusammenfassung">
+      <h1 class="section-h1">Zusammenfassung</h1>
+      <p>
+        Was ist <strong>Alles Wiegen</strong>. Das ganze ist als Trinkspiel mit dem Namen Bier Wiegen entstanden, aber es hat sich tatsächlich zu "Alles Wiegen" entwickelt. 
+        Wir haben schon mit Bier, Wein, Wasser und auch Gurken (mittlwerweile ein Festival Staple) gespiel - wiegt was immer ihr wollt. 
+        Die App baut keine Verbindung zum Internet auf und alle Daten werden lokal gespeichert (es werden höchstens Spielstände via lokaler Verbindung an die Geräte eurer Freunde gesendet, siehe dazu auch Kapitel XXX).
+        Dies ist eine bewusste Entscheidung und wird sehr wahrscheinlich auch nie geupdatet.
+      </p>
+    </section>
+    <section id="features">
+      <h2 class="section-h2">Key Features</h1>
+      <p>
+        Die App ermöglich euch das Spiel Bier Wiegen mit minnimalen Aufwand eurerseits zu Spielen. Insbesondere werden die Messungen von der <strong>Bluetooth-Waage</strong> automatisch an 
+        das Smartphone übertragen. Die Zuweisung an den jeweiligen Spieler erfolgt via <strong>NFC-Chip</strong> am Becher. Die Chips können mit verschiedenen Badges customisiert werden. 
+        Im Querformat werden die UI Elemente entsprechend neu angeordnet sodass ihr das Spiel für alle Mitspieler gutsichtbar auch auf einen <strong>Bildschirm</strong> oder Beamer streamen könnt. 
+        Alternativ oder zusätzlich kann auch ein <strong>Lokaler-Server</strong> gestartet werden sodass jeder alle relevanten Informationen direkt auf seinem Handy sehen kann(hierbei müssen alle Geräte 
+          im gleichen WLAN oder Hotspot sein). Die Ergebnisse werden in einer <strong>Bestenliste</strong> getrackt, ihr könnt auch <strong>Events</strong> anlegen um beispielsweise den Festivals Besten zu bestimmen.
+          Da die Spieldaten nur lokal gespeichert werden müsst ihr entweder immer das selbe Handy nehmen oder ihr könnte die Spiele einzelnd via <strong>QR-Code</strong> direkt übertragen oder gebündelt als
+          <strong>CSV Import/Expor</strong> übertragen.
+        
+        
+      </p>
+    </section>
+    <section id="versions">
+      <h2 class="section-h2">Versions</h1>
+      <p>
+        <h2 id="dank">Dank</h2>
+  <ul>
+    <li>Dank geht raus an Nico, Klari und Rici fürs rege Testen (auf Festivals und daheim).</li>
+    <li>Dank geht raus an David für die Idee mit den NFC-Tags, auch wenns nur Trashtalk war.</li>
+  </ul>
+
+  <h2 id="version-1-15">Version 1.15</h2>
+  <ul>
+    <li>Lokaler Server für Multi-Handy Nutzung eingefügt</li>
+    <li>Farbpalette angepasst</li>
+  </ul>
+
+  <h2 id="version-1-14">Version 1.14</h2>
+  <ul>
+    <li>Neue Item Logos und personalisierbare Items</li>
+    <li>Score besser lesbar im Dark-Mode</li>
+    <li>Nachricht am Spiel-Anfang</li>
+  </ul>
+
+  <h2 id="version-1-13">Version 1.13</h2>
+  <ul>
+    <li>Infos zu Items und Punkte Berechnung in Optionen eingefügt</li>
+    <li>Verhindern, dass der Erste eine Blue Shell bekommt</li>
+  </ul>
+
+  <h2 id="version-1-12">Version 1.12</h2>
+  <ul>
+    <li>Einführung von Patch-Notes</li>
+    <li>Item-Modus</li>
+    <li>Verbessertes Spiel Transfer Verhalten csv/QR</li>
+  </ul>
+
+  <h2 id="version-1-0-0">Version 1.0.0</h2>
+  <ul>
+    <li>Erste Funktionale Version</li>
+  </ul>
+        
+      </p>
+    </section>
+
+    <!-- 2. App-Nutzung -->
+    <section id="app-nutzung">
+      <h1 class="section-h1">App-Nutzung</h1>
+      <p>
+        Im Folgenden wird die Einrichtung der Bluetooth Waage und der Ablauf der verschiedenen Siel Modi erklärt. 
+        Die App ist darauf ausgelegt mit einer kompatiblen Waage und entsprechenden NFC verwendet zu werden. Du kannst auch eine klassiche Küchenwaage verwenden und die Werte per Hand eintragen.
+        Oder auch nur die Bluetooth Waage und keine NFC Chips, die entsprechenden Unterschiede bei der Nutzun werden ensprechend erklärt.
+
+        Quer Modus
+      </p>
+
+      <h2 id="waage-einrichten">Waage einrichten</h2>
+      <p>
+        Um die Bluetooth Funktionen der Waage zu nutzen, musst du die MAC Adresse dein Bluetooth Adresse herrausfinden. 
+        Du kannst die Adresse mit Apps wie "nRF Connec" herrausfinden. Die Adresse hat typischerweise die Form "FF:03:00:6A:F5:06".
+        Eine Liste kompatibler Waagen findest du im Kapitel Hardware.
+        Nachdem du die Adresse herrausgefunden hast, musst du sie in der App in den Bluetooth Optionen Eintragen.
+        Servide UUID und Characteristic UUID bleiben in der regel unverändert.
+        Das Eintragen der Waage MAC Adress ist nur einmalig notwendig. Wenn du (und deine Freunde) mehrer Waagen verwenden, kannst du den Verschiedenen Waagen einen Namen geben und entsprechen speichern und laden.
+        BILD
+        
+      </p>
+
+      <h2 id="im-spiel">Im Spiel</h2>
+      <p>
+        Wenn du eine Bluetooth Waage verwendest klicke auf "Verbinden", eine erfolgreiche Verbindung wird entsprechend signalisiert.
+        
+        
+        Aktuell werden zwei Spiel Modi unterstütz der "Standart Modus" und der "Item Modus", die beiden Modi werden im folgenden beschrieben.
+        
+
+      </p>
+
+      <h3 id="standard-spiel">Standard-Spiel</h3>
+
+  <h4>I. Spieler-Setup &amp; Startgewicht</h4>
+  <ul>
+    <li>
+      <strong>Spieler anlegen:</strong> Trage die Namen der Teilnehmenden ein oder stelle sie über <em>„Letzte laden“</em> aus früheren Runden wieder her.
+    </li>
+    <li>
+      <strong>Sonderregel festlegen:</strong> Über das Zahnrad-Symbol kannst du einstellen, was bei einer Punktlandung (0&nbsp;g Abweichung) passiert: Entweder wird ein Spieler zum Exen ausgewählt (siehe Kapitel <a href="#bagel">Bagel</a>) oder alle anderen müssen einen Schluck trinken.
+    </li>
+    <li>
+      <strong>Wiegen starten:</strong> Starte den Vorgang mit einem Klick auf <em>„Wiegen“</em> und erfasse die Startgewichte aller Getränke:
+      <ul>
+        <li>
+          <strong>Normale Waage:</strong> Nutze die Eingabefelder, um die Werte manuell in Gramm einzutragen.
+        </li>
+        <li>
+          <strong>Bluetooth-Waage (ohne NFC):</strong> Nutze den Button <strong>(1)</strong>, um das aktuell gemessene Gewicht automatisch für den jeweiligen Spieler zu übernehmen.
+        </li>
+        <li>
+          <strong>Bluetooth-Waage (mit NFC):</strong>
+          <ol>
+            <li>Halte den NFC-Chip des Spielers an die NFC-Antenne des Smartphones.</li>
+            <li>Das Smartphone vibriert kurz (lässt sich deaktivieren, siehe Kapitel <em>Optionen</em>) und zeigt die ID des Chips an.</li>
+            <li>Stelle das volle Getränk auf die Waage, weise den Chip über Button <strong>(1)</strong> dem entsprechenden Spieler zu und speichere das Gewicht als Startgewicht.</li>
+          </ol>
+        </li>
+      </ul>
+    </li>
+    <li>
+      Sobald alle Startgewichte erfasst sind, kann das eigentliche Spiel beginnen.
+    </li>
+  </ul>
+
+  <h4>II. Game-Loop</h4>
+  <ol>
+    <li>
+      <strong>Rundenziel festlegen:</strong> Der Spieler, der bisher am meisten getrunken hat (in der ersten Runde der zuerst eingetragene Spieler), legt das Rundenziel in Gramm fest (z.&nbsp;B. 50&nbsp;g).<br>
+      <em>Empfehlung:</em> Wählt eine Untergrenze von mindestens 30&nbsp;g, da Spieler mit Strafschlücken sonst schnell Probleme bekommen.
+    </li>
+    <li>
+      <strong>Persönliches Ziel:</strong> Das System berechnet für alle ein individuelles Ziel, damit alle synchron trinken. Das bedeutet: Alle müssen zunächst den Rückstand auf die Person, die am meisten getrunken hat, aufholen und zusätzlich das Rundenziel trinken.
+    </li>
+    <li>
+      <strong>Trinken:</strong> Alle versuchen, ihre Zielmenge zu erreichen. Dabei darf das Glas nur <strong>einmal</strong> angesetzt werden – Nachkorrigieren ist nicht erlaubt.
+    </li>
+    <li>
+      <strong>Neues Gewicht einwiegen:</strong> Das Wiegen läuft ab wie zu Beginn. Bei NFC-Chips entfällt jedoch die erneute Zuweisung – einfach scannen, auf die Waage stellen und der Rest passiert automatisch.<br>
+      <strong>Wichtig:</strong> Scanne das nächste Getränk erst, nachdem das vorherige von der Waage genommen wurde!
+      <ul>
+        <li>Die Abweichung vom persönlichen Ziel wird direkt angezeigt: Ein <strong>negativer Wert</strong> bedeutet, der Schluck war zu klein; ein <strong>positiver Wert</strong> bedeutet, er war zu groß.</li>
+        <li>Sind alle Gewichte eingetragen, klickt auf <em>„Noch eine Runde“</em> (sofern alle noch genug im Glas haben) oder auf <em>„Beenden“</em>, um zum Endstand zu gelangen.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Rundenauswertung:</strong>
+      <ul>
+        <li>Die Person mit der größten Abweichung trinkt einen Strafschluck, die präziseste Person darf einen Schluck verteilen.</li>
+        <li>Bei einer Abweichung von nur <strong>1&nbsp;g</strong> müssen alle anderen einen Strafschluck trinken.</li>
+        <li><strong>Sonderfall 0&nbsp;g Abweichung („Bagel“):</strong> Ist diese Option aktiviert, greift stattdessen die Bagel-Regel (siehe unten).</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h4>III. Endergebnisse</h4>
+  <p>
+    Auf dem Endbildschirm wird das Gesamtergebnis angezeigt, das sich nach verschiedenen Bewertungskriterien sortieren lässt. Anschließend kannst du den Spielstand optional per QR-Code direkt auf andere Smartphones übertragen (siehe Kapitel <em>XX</em>).
+  </p>
+
+  <h4 id="bagel">Bagel</h4>
+  <p>
+    Wer sein Ziel auf das Gramm genau trifft, darf eine Person auswählen, die ihr Getränk komplett austrinken (exen) muss:
+  </p>
+  <ol>
+    <li>Wähle die betroffene Person in der App aus.</li>
+    <li>Sie holt sich ein neues Getränk, wiegt es ein und du klickst auf <em>„Weiter“</em>.</li>
+    <li>Anschließend muss sie das neue Getränk auf das vorherige Fülllevel heruntertrinken (wird auf dem Bildschirm angezeigt).</li>
+    <li>Wiege das neue Gewicht ein und klicke auf <em>„Weiter“</em>.</li>
+  </ol>
+  <p>
+    <em>Hausregel-Tipp:</em> Liegt die aufzuholende Menge über 200&nbsp;g, darf einmal zwischengewogen werden.
+  </p>
+      
+
+      <h3 id="items-modus">Items-Modus</h3>
+      <p>
+        Erklärung der Spezial-Items, Modifikatoren und wie diese das Wiegen bzw. die Punktevergabe beeinflussen.
+      </p>
+
+      <h2 id="ergebnis">Ergebnis</h2>
+      <p>
+        Auswertung nach Abschluss einer Runde.
+      </p>
+
+      <h3 id="rangliste">Rangliste</h3>
+      <p>
+        Wie die Platzierungen berechnet und dauerhaft gespeichert werden.
+      </p>
+
+      <h3 id="events">Events</h3>
+      <p>
+        Besondere Ereignisse, Meilensteine oder Rekorde, die während des Spiels ausgelöst wurden.
+      </p>
+
+      <h2 id="ergebnisse-bearbeiten">Ergebnisse bearbeiten</h2>
+      <p>
+        Nachträgliches Korrigieren von Werten, Spielernamen oder Löschen fehlerhafter Messungen.
+      </p>
+
+      <h3 id="ergebnisse-teilen">Ergebnisse teilen</h3>
+      <p>
+        Exportmöglichkeiten (z. B. als Bild, Link oder Text) für Messenger und Social Media.
+      </p>
+
+      <h2 id="andere-optionen">Andere Optionen</h2>
+      <p>
+        Weitere Einstellungen in der App (z. B. Einheiten, Soundeffekte, Dark Mode, Reset).
+      </p>
+    </section>
+
+    <!-- 3. Hardware -->
+    <section id="hardware">
+      <h1 class="section-h1">Hardware</h1>
+      <p>
+        Aufbau und Komponenten der physischen Einheit.
+      </p>
+
+      <h2 id="beschreibung">Beschreibung</h2>
+      <p>
+        Die folgenden Items habe ich für die hier beschriebene Bauanleitung verwendet, du kannst natrülich auch eigene Varianten erschaffen. 
+        Nur bei der Waage ist es wichtig die richtige zu nehmen, da andere Bluetooth Waagen vermutlich nicht kompatibel sind.
+        Falls du eine andere Bluetooth-Waage hast, kontaktiere mich gerne und wir können versuchen eine App-Unterstützung zu implementieren.
+        <div class="my-6 overflow-x-auto rounded-lg border border-skin-line">
+  <div class="my-6 overflow-x-auto rounded-lg border border-skin-line">
+  <table class="w-full text-left border-collapse text-sm">
+    <thead class="bg-skin-card-muted border-b border-skin-line text-skin-base uppercase text-xs tracking-wider">
+      <tr>
+        <th class="py-3 px-4 font-semibold min-w-[130px] whitespace-nowrap border-r border-skin-line">Item</th>
+        <th class="py-3 px-4 font-semibold">Beschreibung</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-skin-line">
+      <tr class="hover:bg-skin-card/60 transition-colors">
+        <td class="py-3 px-4 font-medium min-w-[130px] whitespace-nowrap border-r border-skin-line">
+          <a href="https://www.amazon.de/-/en/dp/B075X49J5Y?ref=ppx_yo2ov_dt_b_fed_asin_title&amp;th=1" target="_blank" rel="noopener noreferrer" class="underline decoration-dashed underline-offset-4 hover:text-skin-accent">Box</a>
+        </td>
+        <td class="py-3 px-4">Nur notwendig, wenn du die Box nachbauen willst.</td>
+      </tr>
+      <tr class="hover:bg-skin-card/60 transition-colors">
+        <td class="py-3 px-4 font-medium min-w-[130px] whitespace-nowrap border-r border-skin-line">
+          <a href="https://www.amazon.de/-/en/dp/B07BCPB95W?ref=ppx_yo2ov_dt_b_fed_asin_title&amp;th=1" target="_blank" rel="noopener noreferrer" class="underline decoration-dashed underline-offset-4 hover:text-skin-accent">Band</a>
+        </td>
+        <td class="py-3 px-4">Jedes mindestens 3 cm breite Band funktioniert.</td>
+      </tr>
+      <tr class="hover:bg-skin-card/60 transition-colors">
+        <td class="py-3 px-4 font-medium min-w-[130px] whitespace-nowrap border-r border-skin-line">
+          <a href="https://www.amazon.de/-/en/dp/B09MRXVBV6?ref=ppx_yo2ov_dt_b_fed_asin_title&amp;th=1" target="_blank" rel="noopener noreferrer" class="underline decoration-dashed underline-offset-4 hover:text-skin-accent">Waage</a>
+        </td>
+        <td class="py-3 px-4">Beide Farben funktionieren.</td>
+      </tr>
+      <tr class="hover:bg-skin-card/60 transition-colors">
+        <td class="py-3 px-4 font-medium min-w-[130px] whitespace-nowrap border-r border-skin-line">
+          <a href="https://www.amazon.de/-/en/dp/B0DLWNMV5Z?ref=ppx_yo2ov_dt_b_fed_asin_title&amp;th=1" target="_blank" rel="noopener noreferrer" class="underline decoration-dashed underline-offset-4 hover:text-skin-accent">Sticker</a>
+        </td>
+        <td class="py-3 px-4">Achte darauf, selbstklebende zu kaufen.</td>
+      </tr>
+      <tr class="hover:bg-skin-card/60 transition-colors">
+        <td class="py-3 px-4 font-medium min-w-[130px] whitespace-nowrap border-r border-skin-line">
+          <a href="https://www.amazon.de/-/en/dp/B0D8P2Q6QC?ref=ppx_yo2ov_dt_b_fed_asin_title&amp;th=1" target="_blank" rel="noopener noreferrer" class="underline decoration-dashed underline-offset-4 hover:text-skin-accent">NFC-Chips</a>
+        </td>
+        <td class="py-3 px-4">Wichtig: Es müssen welche sein, die für „Stick on Metal“ geeignet sind.</td>
+      </tr>
+      <tr class="hover:bg-skin-card/60 transition-colors">
+        <td class="py-3 px-4 font-medium min-w-[130px] whitespace-nowrap border-r border-skin-line">
+          <a href="https://www.amazon.de/-/en/dp/B0F48YLHRZ?ref=ppx_yo2ov_dt_b_fed_asin_title" target="_blank" rel="noopener noreferrer" class="underline decoration-dashed underline-offset-4 hover:text-skin-accent">Saugnapf</a>
+        </td>
+        <td class="py-3 px-4">Nimm diesen, wenn du das bereitgestellte 3D-Modell verwendest.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+      </p>
+
+      <h2 id="die-box">Die Box</h2>
+      <p>
+        Informationen zum Gehäuse (z. B. 3D-Druck, Maße, Material und Montage).
+      </p>
+
+      <h2 id="die-badges">Die Badges</h2>
+      <p>
+        Übersicht über die physischen Badges/Marker und deren Einsatz.
+      </p>
+
+      <h3 id="bilder">Bilder</h3>
+      <div class="media-placeholder">
+        [ Platzhalter für Fotos der Hardware, Box und Badges – hier &lt;img src="..."&gt; einfügen ]
+      </div>
+
+      <h3 id="baender">Bänder</h3>
+      <p>
+        Details zu den verwendeten Bändern/Befestigungen und deren Handhabung.
+      </p>
+
+      <h3 id="saugnaepfe">Saugnäpfe</h3>
+      <p>
+        Hinweise zur Befestigung auf glatten Oberflächen und zur optimalen Haftung.
+      </p>
+      
+    </section>
+    <h2 id="daten">Datenschutz</h2>
+      <p><strong>App:</strong> AllesWiegen &bull; <strong>Stand:</strong> November 2026</p>
+
+<h2>1. Verantwortlicher</h2>
+<p>Verantwortlich für die Datenverarbeitung im Zusammenhang mit dieser App im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:</p>
+<p>
+  <strong>[Dein Vor- und Nachname bzw. Firmenname]</strong><br>
+  [Straße und Hausnummer]<br>
+  [PLZ und Ort]<br>
+  E-Mail: <a href="mailto:[Deine Kontakt-E-Mail-Adresse]">[Deine Kontakt-E-Mail-Adresse]</a>
+</p>
+
+<h2>2. Grundsatz: Lokale Datenverarbeitung</h2>
+<p>Der Schutz Ihrer Daten hat für uns höchste Priorität. Die App „AllesWiegen“ ist so konzipiert, dass alle von Ihnen erfassten Daten (z.&nbsp;B. Wiegedaten, Artikel, Einstellungen und Verläufe) ausschließlich lokal auf Ihrem Smartphone in einer internen Datenbank gespeichert werden.</p>
+<p>Wir betreiben keine eigenen Server und haben keinen Zugriff auf Ihre in der App gespeicherten Inhalte. Eine Übermittlung Ihrer Wiegedaten an uns findet nicht statt.</p>
+
+<h2>3. Zugriffsrechte und Schnittstellen der App</h2>
+<p>Damit die App ihre Funktionen erfüllen kann, greift sie auf bestimmte Hardware- und Systemschnittstellen Ihres Geräts zu:</p>
+<ul>
+  <li>
+    <strong>Bluetooth (<code>BLUETOOTH_SCAN</code>, <code>BLUETOOTH_CONNECT</code>):</strong><br>
+    Wird ausschließlich dazu verwendet, eine direkte, lokale Verbindung zu kompatiblen Bluetooth-Waagen oder Peripheriegeräten herzustellen und Messwerte zu empfangen. Es findet ausdrücklich keine Standortbestimmung über Bluetooth statt. <em>(Hinweis: Auf älteren Android-Versionen unter Android 12 erfordert das Betriebssystem technisch bedingt die Standortberechtigung für die Bluetooth-Gerätesuche; Standortdaten werden von der App jedoch weder erhoben noch verarbeitet.)</em>
+  </li>
+  <li>
+    <strong>NFC (<code>NFC</code>):</strong><br>
+    Wird genutzt, um NFC-Tags direkt am Gerät auszulesen oder zu beschreiben. Die Verarbeitung erfolgt rein lokal auf dem Gerät.
+  </li>
+  <li>
+    <strong>Lokales Netzwerk / WLAN &amp; Webhooks (<code>INTERNET</code>, <code>ACCESS_NETWORK_STATE</code>, <code>ACCESS_WIFI_STATE</code>):</strong><br>
+    Die App bietet die Möglichkeit, einen lokalen Server bereitzustellen bzw. Webhooks zu nutzen, um im lokalen Netzwerk (WLAN) direkt mit anderen Geräten oder Systemen (z.&nbsp;B. Smart-Home-Systemen oder lokalen Computern) zu kommunizieren.
+    <ul>
+      <li>Diese Kommunikation findet ausschließlich direkt zwischen Ihrem Smartphone und den von Ihnen konfigurierten Zielgeräten statt.</li>
+      <li>Es werden hierbei keine Daten an uns übertragen. Sofern Sie eigene Ziel-URLs (Webhooks) eintragen, erfolgt die Datenübertragung an diese Adresse auf Ihre eigene Veranlassung und Verantwortung.</li>
+    </ul>
+  </li>
+  <li>
+    <strong>Kamera / Barcode- &amp; QR-Code-Scanner:</strong><br>
+    Für das Scannen von Barcodes und QR-Codes wird der Google Play Services Code Scanner (Google ML Kit) verwendet (siehe Abschnitt 4).
+  </li>
+</ul>
+
+<h2>4. Einsatz von Drittanbieter-Diensten (Google Play Store &amp; Google Play Services)</h2>
+<p>Für die Bereitstellung der App sowie für die Barcode- und QR-Code-Erkennung nutzt die App Dienste der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland:</p>
+<ul>
+  <li>
+    <strong>Google Play Services Code Scanner (ML Kit):</strong><br>
+    Für das Scannen von Codes kommt das SDK von Google ML Kit zum Einsatz. Der eigentliche Scan-Vorgang sowie die Analyse des Kamerabildes finden vollständig lokal auf Ihrem Gerät statt. Es werden keine Kamerabilder oder gescannten Barcode-Inhalte an Google übermittelt. Im Rahmen der Bereitstellung und Aktualisierung des Scan-Moduls erhebt Google technische Diagnose- und Leistungsdaten (z.&nbsp;B. Informationen über den erfolgreichen Modell-Download, Absturzberichte, App-Paketname, Android-Version sowie eine pseudonyme Installations-ID).
+  </li>
+  <li>
+    <strong>Google Play Store &amp; Android Vitals:</strong><br>
+    Beim Herunterladen, Aktualisieren oder Ausführen der App über den Google Play Store verarbeitet Google eigenverantwortlich technische Nutzungs- und Diagnosedaten (z.&nbsp;B. Installationsstatus, Gerätemodell, Android-Version sowie anonymisierte Absturz- und Leistungsberichte über Android Vitals), um die Stabilität und Sicherheit der App-Verteilung zu gewährleisten.
+  </li>
+  <li>
+    <strong>Rechtsgrundlage:</strong><br>
+    Die Nutzung erfolgt auf Grundlage unseres berechtigten Interesses an einer zuverlässigen, sicheren und ressourcenschonenden Bereitstellung der App und ihrer Scan-Funktion (Art. 6 Abs. 1 lit. f DSGVO).
+  </li>
+</ul>
+<p>Weitere Informationen zum Datenschutz bei Google finden Sie in der Datenschutzerklärung von Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></p>
+
+<h2>5. Datensicherung über das Betriebssystem (Android Auto-Backup)</h2>
+<p>Sofern Sie in den Systemeinstellungen Ihres Android-Geräts die automatische Gerätesicherung (z.&nbsp;B. über Google One / Google Drive) aktiviert haben, werden die lokalen App-Daten (einschließlich der Datenbank) durch das Betriebssystem automatisch und verschlüsselt in Ihrem persönlichen Google-Konto gesichert. Diese Sicherung unterliegt den Einstellungen Ihres Google-Kontos; wir haben keinen Zugriff auf diese Backups. Sie können diese Funktion jederzeit in den Android-Systemeinstellungen deaktivieren.</p>
+
+<h2>6. Speicherdauer und Löschung Ihrer Daten</h2>
+<p>Da alle App-Daten lokal auf Ihrem Endgerät gespeichert werden, bestimmen Sie selbst über die Speicherdauer. Sie können Ihre Daten jederzeit innerhalb der App löschen, den App-Speicher über die Android-Systemeinstellungen leeren oder die Daten vollständig durch Deinstallation der App von Ihrem Gerät entfernen.</p>
+
+<h2>7. Ihre Rechte als betroffene Person</h2>
+<p>Nach der DSGVO stehen Ihnen gegenüber dem Verantwortlichen – soweit personenbezogene Daten verarbeitet werden – folgende Rechte zu:</p>
+<ul>
+  <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
+  <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
+  <li>Recht auf Löschung (Art. 17 DSGVO)</li>
+  <li>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+  <li>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</li>
+  <li>Widerspruchsrecht gegen die Verarbeitung (Art. 21 DSGVO)</li>
+</ul>
+<p>Zudem haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten zu beschweren (Art. 77 DSGVO).</p>
+
+<h2>8. Bereitstellung dieser Webseite (GitHub Pages)</h2>
+<p>Diese Datenschutzerklärung wird über GitHub Pages (GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA) bereitgestellt. Beim Aufruf dieser Webseite erfasst GitHub technisch bedingt Verbindungsdaten (z.&nbsp;B. Ihre IP-Adresse) in Server-Logfiles, um die Sicherheit und Auslieferung der Seite zu gewährleisten (Art. 6 Abs. 1 lit. f DSGVO). Weitere Informationen finden Sie in der <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">Datenschutzerklärung von GitHub</a>.</p>
+
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <span>Alles Wiegen &copy; 2026</span>
+    <a href="#">Nach oben ↑</a>
+  </footer>
+
+  <!-- Light / Dark Mode Script -->
+  <script>
+    const themeBtn = document.getElementById('theme-btn');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    const htmlEl = document.documentElement;
+
+    // Gespeichertes Theme oder System-Präferenz laden
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      setTheme('dark');
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const currentTheme = htmlEl.getAttribute('data-theme');
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+
+    function setTheme(theme) {
+      htmlEl.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      if (theme === 'dark') {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>
