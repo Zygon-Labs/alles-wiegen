@@ -1,4 +1,4 @@
-e<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de" data-theme="light">
 <head>
   <meta charset="UTF-8" />
@@ -191,7 +191,15 @@ e<!DOCTYPE html>
       scroll-margin-top: 1.5rem;
     }
 
-    /* Anker-Symbol beim Hovern über Überschriften (typisch AstroPaper) */
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+      scroll-margin-top: 1.5rem;
+    }
+
+    /* Anker-Symbol vor Überschriften (typisch AstroPaper) */
     h1.section-h1::before, h2::before, h3::before {
       content: "# ";
       color: var(--color-accent);
@@ -202,20 +210,121 @@ e<!DOCTYPE html>
       margin-bottom: 1rem;
     }
 
-    ul {
+    ul, ol {
       margin-left: 1.5rem;
       margin-bottom: 1rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    li > ul, li > ol {
+      margin-top: 0.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
+
+    /* Tabellen Styling im AstroPaper Look */
+    .table-wrapper {
+      margin: 1.5rem 0;
+      overflow-x: auto;
+      border: 1px dashed var(--color-border);
+      border-radius: 4px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    thead {
+      background-color: rgba(128, 128, 128, 0.08);
+      border-bottom: 1px dashed var(--color-border);
+    }
+
+    th {
+      padding: 0.75rem 1rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      border-right: 1px dashed var(--color-border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px dashed var(--color-border);
+      border-right: 1px dashed var(--color-border);
+      vertical-align: top;
+    }
+
+    th:last-child, td:last-child {
+      border-right: none;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background-color: rgba(128, 128, 128, 0.04);
+    }
+
+    /* Wertungs-Grid */
+    .ranking-modes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin: 1.25rem 0;
+    }
+
+    .ranking-mode {
+      padding: 1rem 1.25rem;
+      border: 1px dashed var(--color-border);
+      background-color: rgba(128, 128, 128, 0.04);
+      border-radius: 4px;
+    }
+
+    .ranking-mode h4 {
+      margin-top: 0;
+      color: var(--color-accent);
+    }
+
+    .ranking-mode p {
+      margin-bottom: 0;
+      font-size: 0.9rem;
     }
 
     /* Platzhalter für Bilder/Hardware */
     .media-placeholder {
       border: 1px dashed var(--color-accent);
-      padding: 2rem;
+      padding: 1.5rem;
       text-align: center;
       margin: 1.25rem 0;
       border-radius: 4px;
       font-size: 0.9rem;
-      opacity: 0.8;
+      opacity: 0.85;
+      background-color: rgba(128, 128, 128, 0.03);
+    }
+
+    /* Info / Hinweis Box */
+    .note-box {
+      border-left: 3px solid var(--color-accent);
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      background-color: rgba(128, 128, 128, 0.04);
+      font-size: 0.95rem;
     }
 
     /* Footer */
@@ -244,7 +353,6 @@ e<!DOCTYPE html>
       <a href="#zusammenfassung">Doku</a>
       <a href="#hardware">Hardware</a>
       <!-- GitHub Link anpassen -->
-  
       <button id="theme-btn" aria-label="Theme wechseln" title="Light/Dark Mode umschalten">
         <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -263,7 +371,7 @@ e<!DOCTYPE html>
     <span class="toc-title">Inhaltsverzeichnis</span>
     <ul class="toc-list">
       <li class="toc-lvl-1"><a href="#zusammenfassung">Zusammenfassung</a></li>
-      <li class="toc-lvl-2"><a href="#featues">Key Features</a></li>
+      <li class="toc-lvl-2"><a href="#features">Key Features</a></li>
       <li class="toc-lvl-2"><a href="#versions">Versions-Übersicht</a></li>
       <li class="toc-lvl-1"><a href="#app-nutzung">App-Nutzung</a></li>
       <li class="toc-lvl-2"><a href="#waage-einrichten">Waage einrichten</a></li>
@@ -277,7 +385,6 @@ e<!DOCTYPE html>
       <li class="toc-lvl-2"><a href="#ergebnisse-bearbeiten">Ergebnisse bearbeiten</a></li>
       <li class="toc-lvl-3"><a href="#ergebnisse-teilen">Ergebnisse teilen</a></li>
       <li class="toc-lvl-2"><a href="#andere-optionen">Andere Optionen</a></li>
-
       <li class="toc-lvl-1"><a href="#hardware">Hardware</a></li>
       <li class="toc-lvl-2"><a href="#beschreibung">Beschreibung</a></li>
       <li class="toc-lvl-2"><a href="#die-box">Die Box</a></li>
@@ -296,312 +403,376 @@ e<!DOCTYPE html>
     <section id="zusammenfassung">
       <h1 class="section-h1">Zusammenfassung</h1>
       <p>
-        Was ist <strong>Alles Wiegen</strong>. Das ganze ist als Trinkspiel mit dem Namen Bier Wiegen entstanden, aber es hat sich tatsächlich zu "Alles Wiegen" entwickelt. 
-        Wir haben schon mit Bier, Wein, Wasser und auch Gurken (mittlwerweile ein Festival Staple) gespiel - wiegt was immer ihr wollt. 
-        Die App baut keine Verbindung zum Internet auf und alle Daten werden lokal gespeichert (es werden höchstens Spielstände via lokaler Verbindung an die Geräte eurer Freunde gesendet, siehe dazu auch Kapitel XXX).
-        Dies ist eine bewusste Entscheidung und wird sehr wahrscheinlich auch nie geupdatet.
+        Was ist <strong>Alles Wiegen</strong>? Das Ganze ist als Trinkspiel mit dem Namen „Bier Wiegen“ entstanden, hat sich aber tatsächlich zu „Alles Wiegen“ entwickelt. 
+        Wir haben schon mit Bier, Wein, Wasser und auch Gurken (mittlerweile ein Festival-Staple) gespielt – wiegt, was immer ihr wollt.
       </p>
-    </section>
-    <section id="features">
-      <h2 class="section-h2">Key Features</h1>
+
+      <h2 id="features">Key Features</h2>
       <p>
-        Die App ermöglich euch das Spiel Bier Wiegen mit minnimalen Aufwand eurerseits zu Spielen. Insbesondere werden die Messungen von der <strong>Bluetooth-Waage</strong> automatisch an 
-        das Smartphone übertragen. Die Zuweisung an den jeweiligen Spieler erfolgt via <strong>NFC-Chip</strong> am Becher. Die Chips können mit verschiedenen Badges customisiert werden. 
-        Im Querformat werden die UI Elemente entsprechend neu angeordnet sodass ihr das Spiel für alle Mitspieler gutsichtbar auch auf einen <strong>Bildschirm</strong> oder Beamer streamen könnt. 
-        Alternativ oder zusätzlich kann auch ein <strong>Lokaler-Server</strong> gestartet werden sodass jeder alle relevanten Informationen direkt auf seinem Handy sehen kann(hierbei müssen alle Geräte 
-          im gleichen WLAN oder Hotspot sein). Die Ergebnisse werden in einer <strong>Bestenliste</strong> getrackt, ihr könnt auch <strong>Events</strong> anlegen um beispielsweise den Festivals Besten zu bestimmen.
-          Da die Spieldaten nur lokal gespeichert werden müsst ihr entweder immer das selbe Handy nehmen oder ihr könnte die Spiele einzelnd via <strong>QR-Code</strong> direkt übertragen oder gebündelt als
-          <strong>CSV Import/Expor</strong> übertragen.
-        
-        
+        Die App ermöglicht euch, das Spiel mit minimalem Aufwand eurerseits zu spielen:
       </p>
-    </section>
-    <section id="versions">
-      <h2 class="section-h2">Versions</h1>
-      <p>
-        <h2 id="dank">Dank</h2>
-  <ul>
-    <li>Dank geht raus an Nico, Klari und Rici fürs rege Testen (auf Festivals und daheim).</li>
-    <li>Dank geht raus an David für die Idee mit den NFC-Tags, auch wenns nur Trashtalk war.</li>
-  </ul>
+      <ul>
+        <li><strong>Bluetooth-Waage:</strong> Die Messungen werden automatisch an das Smartphone übertragen.</li>
+        <li><strong>NFC-Chips:</strong> Die Zuweisung an den jeweiligen Spieler erfolgt via NFC-Chip am Becher. Die Chips können mit verschiedenen Badges personalisiert werden.</li>
+        <li><strong>Querformat-Ansicht:</strong> Im Querformat werden die UI-Elemente entsprechend neu angeordnet, sodass ihr das Spiel für alle Mitspieler gut sichtbar auf einen <strong>Bildschirm</strong> oder Beamer streamen könnt.</li>
+        <li><strong>Lokaler Server:</strong> Alternativ oder zusätzlich kann ein lokaler Server gestartet werden, sodass jeder alle relevanten Informationen direkt auf seinem Handy sehen kann (hierbei müssen alle Geräte im gleichen WLAN oder Hotspot sein).</li>
+        <li><strong>Bestenliste &amp; Events:</strong> Die Ergebnisse werden in einer Bestenliste getrackt. Ihr könnt auch Events anlegen, um beispielsweise den Festival-Besten zu bestimmen.</li>
+        <li><strong>Datentransfer:</strong> Da die Spieldaten nur lokal gespeichert werden, müsst ihr entweder immer dasselbe Handy nehmen oder könnt Spiele einzeln via <strong>QR-Code</strong> bzw. gebündelt als <strong>CSV-Import/-Export</strong> übertragen.</li>
+      </ul>
 
-  <h2 id="version-1-15">Version 1.15</h2>
-  <ul>
-    <li>Lokaler Server für Multi-Handy Nutzung eingefügt</li>
-    <li>Farbpalette angepasst</li>
-  </ul>
-
-  <h2 id="version-1-14">Version 1.14</h2>
-  <ul>
-    <li>Neue Item Logos und personalisierbare Items</li>
-    <li>Score besser lesbar im Dark-Mode</li>
-    <li>Nachricht am Spiel-Anfang</li>
-  </ul>
-
-  <h2 id="version-1-13">Version 1.13</h2>
-  <ul>
-    <li>Infos zu Items und Punkte Berechnung in Optionen eingefügt</li>
-    <li>Verhindern, dass der Erste eine Blue Shell bekommt</li>
-  </ul>
-
-  <h2 id="version-1-12">Version 1.12</h2>
-  <ul>
-    <li>Einführung von Patch-Notes</li>
-    <li>Item-Modus</li>
-    <li>Verbessertes Spiel Transfer Verhalten csv/QR</li>
-  </ul>
-
-  <h2 id="version-1-0-0">Version 1.0.0</h2>
-  <ul>
-    <li>Erste Funktionale Version</li>
-  </ul>
-        
-      </p>
+      <h2 id="versions">Versions-Übersicht</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Version</th>
+              <th>Änderungen &amp; Neuerungen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Version 1.15</strong></td>
+              <td>
+                <ul>
+                  <li>Lokalen Server für Multi-Handy-Nutzung eingefügt</li>
+                  <li>Farbpalette angepasst</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Version 1.14</strong></td>
+              <td>
+                <ul>
+                  <li>Neue Item-Logos und personalisierbare Items</li>
+                  <li>Score im Dark-Mode besser lesbar gemacht</li>
+                  <li>Nachricht am Spielanfang hinzugefügt</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Version 1.13</strong></td>
+              <td>
+                <ul>
+                  <li>Infos zu Items und Punkteberechnung in Optionen eingefügt</li>
+                  <li>Verhindert, dass der Erste eine Blue Shell bekommt</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Version 1.12</strong></td>
+              <td>
+                <ul>
+                  <li>Einführung von Patch-Notes</li>
+                  <li>Item-Modus hinzugefügt</li>
+                  <li>Verbessertes Spiel-Transfer-Verhalten (CSV / QR)</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Version 1.0.0</strong></td>
+              <td>
+                <ul>
+                  <li>Erste funktionale Version</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <!-- 2. App-Nutzung -->
     <section id="app-nutzung">
       <h1 class="section-h1">App-Nutzung</h1>
       <p>
-        Im Folgenden wird die Einrichtung der Bluetooth Waage und der Ablauf der verschiedenen Siel Modi erklärt. 
-        Die App ist darauf ausgelegt mit einer kompatiblen Waage und entsprechenden NFC verwendet zu werden. Du kannst auch eine klassiche Küchenwaage verwenden und die Werte per Hand eintragen.
-        Oder auch nur die Bluetooth Waage und keine NFC Chips, die entsprechenden Unterschiede bei der Nutzun werden ensprechend erklärt.
-
-        Quer Modus
+        Im Folgenden werden die Einrichtung der Bluetooth-Waage und der Ablauf der verschiedenen Spielmodi erklärt. 
+        Die App ist darauf ausgelegt, mit einer kompatiblen Waage und entsprechenden NFC-Chips verwendet zu werden. Du kannst aber auch:
       </p>
+      <ul>
+        <li>eine klassische Küchenwaage verwenden und die Werte per Hand eintragen,</li>
+        <li>oder nur die Bluetooth-Waage ohne NFC-Chips nutzen (die Unterschiede bei der Nutzung werden unten erklärt).</li>
+      </ul>
 
       <h2 id="waage-einrichten">Waage einrichten</h2>
       <p>
-        Um die Bluetooth Funktionen der Waage zu nutzen, musst du die MAC Adresse dein Bluetooth Adresse herrausfinden. 
-        Du kannst die Adresse mit Apps wie "nRF Connec" herrausfinden. Die Adresse hat typischerweise die Form "FF:03:00:6A:F5:06".
-        Eine Liste kompatibler Waagen findest du im Kapitel Hardware.
-        Nachdem du die Adresse herrausgefunden hast, musst du sie in der App in den Bluetooth Optionen Eintragen.
-        Servide UUID und Characteristic UUID bleiben in der regel unverändert.
-        Das Eintragen der Waage MAC Adress ist nur einmalig notwendig. Wenn du (und deine Freunde) mehrer Waagen verwenden, kannst du den Verschiedenen Waagen einen Namen geben und entsprechen speichern und laden.
-        BILD
-        
+        Um die Bluetooth-Funktionen der Waage zu nutzen, musst du die MAC-Adresse deiner Waage herausfinden:
       </p>
+      <ul>
+        <li><strong>MAC-Adresse ermitteln:</strong> Du kannst die Adresse mit Apps wie „nRF Connect“ herausfinden (oder die Suchfunktion direkt in der App nutzen, um Bluetooth-Waagen in der Umgebung zu finden). Die Adresse hat typischerweise die Form <code>FF:03:00:6A:F5:06</code>.</li>
+        <li><strong>In der App eintragen:</strong> Trage die Adresse in den Bluetooth-Optionen der App ein. <em>Service UUID</em> und <em>Characteristic UUID</em> bleiben in der Regel unverändert.</li>
+        <li><strong>Speichern &amp; Verwalten:</strong> Das Eintragen der MAC-Adresse ist nur einmalig notwendig. Wenn du und deine Freunde mehrere Waagen verwendet, könnt ihr diesen Namen geben und sie entsprechend speichern und laden.</li>
+      </ul>
+      <p>Eine Liste kompatibler Waagen findest du im Kapitel <a href="#hardware">Hardware</a>.</p>
 
       <h2 id="im-spiel">Im Spiel</h2>
       <p>
-        Wenn du eine Bluetooth Waage verwendest klicke auf "Verbinden", eine erfolgreiche Verbindung wird entsprechend signalisiert.
-        
-        
-        Aktuell werden zwei Spiel Modi unterstütz der "Standart Modus" und der "Item Modus", die beiden Modi werden im folgenden beschrieben.
-        
-
+        Wenn du eine Bluetooth-Waage verwendest, klicke auf <em>„Verbinden“</em> – eine erfolgreiche Verbindung wird entsprechend signalisiert. 
+        Aktuell werden zwei Spielmodi unterstützt: der <strong>Standard-Modus</strong> und der <strong>Items-Modus</strong>.
       </p>
 
       <h3 id="standard-spiel">Standard-Spiel</h3>
 
-  <h4>I. Spieler-Setup &amp; Startgewicht</h4>
-  <ul>
-    <li>
-      <strong>Spieler anlegen:</strong> Trage die Namen der Teilnehmenden ein oder stelle sie über <em>„Letzte laden“</em> aus früheren Runden wieder her.
-    </li>
-    <li>
-      <strong>Sonderregel festlegen:</strong> Über das Zahnrad-Symbol kannst du einstellen, was bei einer Punktlandung (0&nbsp;g Abweichung) passiert: Entweder wird ein Spieler zum Exen ausgewählt (siehe Kapitel <a href="#bagel">Bagel</a>) oder alle anderen müssen einen Schluck trinken.
-    </li>
-    <li>
-      <strong>Wiegen starten:</strong> Starte den Vorgang mit einem Klick auf <em>„Wiegen“</em> und erfasse die Startgewichte aller Getränke:
+      <h4>I. Spieler-Setup &amp; Startgewicht</h4>
       <ul>
         <li>
-          <strong>Normale Waage:</strong> Nutze die Eingabefelder, um die Werte manuell in Gramm einzutragen.
+          <strong>Spieler anlegen:</strong> Trage die Namen der Teilnehmenden ein oder stelle sie über <em>„Letzte laden“</em> aus früheren Runden wieder her.
         </li>
         <li>
-          <strong>Bluetooth-Waage (ohne NFC):</strong> Nutze den Button <strong>(1)</strong>, um das aktuell gemessene Gewicht automatisch für den jeweiligen Spieler zu übernehmen.
+          <strong>Sonderregel festlegen:</strong> Über das Zahnrad-Symbol kannst du einstellen, was bei einer Punktlandung (0&nbsp;g Abweichung) passiert: Entweder wird ein Spieler zum Exen ausgewählt (siehe Kapitel <a href="#bagel">Bagel</a>) oder alle anderen müssen einen Schluck trinken.
         </li>
         <li>
-          <strong>Bluetooth-Waage (mit NFC):</strong>
-          <ol>
-            <li>Halte den NFC-Chip des Spielers an die NFC-Antenne des Smartphones.</li>
-            <li>Das Smartphone vibriert kurz (lässt sich deaktivieren, siehe Kapitel <em>Optionen</em>) und zeigt die ID des Chips an.</li>
-            <li>Stelle das volle Getränk auf die Waage, weise den Chip über Button <strong>(1)</strong> dem entsprechenden Spieler zu und speichere das Gewicht als Startgewicht.</li>
-          </ol>
+          <strong>Wiegen starten:</strong> Starte den Vorgang mit einem Klick auf <em>„Wiegen“</em> und erfasse die Startgewichte aller Getränke:
+          <ul>
+            <li>
+              <strong>Normale Waage:</strong> Nutze die Eingabefelder, um die Werte manuell in Gramm einzutragen.
+            </li>
+            <li>
+              <strong>Bluetooth-Waage (ohne NFC):</strong> Nutze den Button <strong>(1)</strong>, um das aktuell gemessene Gewicht automatisch für den jeweiligen Spieler zu übernehmen.
+            </li>
+            <li>
+              <strong>Bluetooth-Waage (mit NFC):</strong>
+              <ol>
+                <li>Halte den NFC-Chip des Spielers an die NFC-Antenne des Smartphones.</li>
+                <li>Das Smartphone vibriert kurz (lässt sich deaktivieren, siehe Kapitel <a href="#andere-optionen">Andere Optionen</a>) und zeigt die ID des Chips an.</li>
+                <li>Stelle das volle Getränk auf die Waage, weise den Chip über Button <strong>(1)</strong> dem entsprechenden Spieler zu und speichere das Gewicht als Startgewicht.</li>
+              </ol>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Sobald alle Startgewichte erfasst sind, kann das eigentliche Spiel beginnen.
         </li>
       </ul>
-    </li>
-    <li>
-      Sobald alle Startgewichte erfasst sind, kann das eigentliche Spiel beginnen.
-    </li>
-  </ul>
 
-  <h4>II. Game-Loop</h4>
-  <ol>
-    <li>
-      <strong>Rundenziel festlegen:</strong> Der Spieler, der bisher am meisten getrunken hat (in der ersten Runde der zuerst eingetragene Spieler), legt das Rundenziel in Gramm fest (z.&nbsp;B. 50&nbsp;g).<br>
-      <em>Empfehlung:</em> Wählt eine Untergrenze von mindestens 30&nbsp;g, da Spieler mit Strafschlücken sonst schnell Probleme bekommen.
-    </li>
-    <li>
-      <strong>Persönliches Ziel:</strong> Das System berechnet für alle ein individuelles Ziel, damit alle synchron trinken. Das bedeutet: Alle müssen zunächst den Rückstand auf die Person, die am meisten getrunken hat, aufholen und zusätzlich das Rundenziel trinken.
-    </li>
-    <li>
-      <strong>Trinken:</strong> Alle versuchen, ihre Zielmenge zu erreichen. Dabei darf das Glas nur <strong>einmal</strong> angesetzt werden – Nachkorrigieren ist nicht erlaubt.
-    </li>
-    <li>
-      <strong>Neues Gewicht einwiegen:</strong> Das Wiegen läuft ab wie zu Beginn. Bei NFC-Chips entfällt jedoch die erneute Zuweisung – einfach scannen, auf die Waage stellen und der Rest passiert automatisch.<br>
-      <strong>Wichtig:</strong> Scanne das nächste Getränk erst, nachdem das vorherige von der Waage genommen wurde!
-      <ul>
-        <li>Die Abweichung vom persönlichen Ziel wird direkt angezeigt: Ein <strong>negativer Wert</strong> bedeutet, der Schluck war zu klein; ein <strong>positiver Wert</strong> bedeutet, er war zu groß.</li>
-        <li>Sind alle Gewichte eingetragen, klickt auf <em>„Noch eine Runde“</em> (sofern alle noch genug im Glas haben) oder auf <em>„Beenden“</em>, um zum Endstand zu gelangen.</li>
-      </ul>
-    </li>
-    <li>
-      <strong>Rundenauswertung:</strong>
-      <ul>
-        <li>Die Person mit der größten Abweichung trinkt einen Strafschluck, die präziseste Person darf einen Schluck verteilen.</li>
-        <li>Bei einer Abweichung von nur <strong>1&nbsp;g</strong> müssen alle anderen einen Strafschluck trinken.</li>
-        <li><strong>Sonderfall 0&nbsp;g Abweichung („Bagel“):</strong> Ist diese Option aktiviert, greift stattdessen die Bagel-Regel (siehe unten).</li>
-      </ul>
-    </li>
-  </ol>
+      <h4>II. Game-Loop</h4>
+      <ol>
+        <li>
+          <strong>Rundenziel festlegen:</strong> Der Spieler, der bisher am meisten getrunken hat (in der ersten Runde der zuerst eingetragene Spieler), legt das Rundenziel in Gramm fest (z.&nbsp;B. 50&nbsp;g).<br>
+          <em>Empfehlung:</em> Wählt eine Untergrenze von mindestens 30&nbsp;g, da Spieler mit Strafschlücken sonst schnell Probleme bekommen.
+        </li>
+        <li>
+          <strong>Persönliches Ziel:</strong> Das System berechnet für alle ein individuelles Ziel, damit alle synchron trinken. Das bedeutet: Alle müssen zunächst den Rückstand auf die Person, die am meisten getrunken hat, aufholen und zusätzlich das Rundenziel trinken.
+        </li>
+        <li>
+          <strong>Trinken:</strong> Alle versuchen, ihre Zielmenge zu erreichen. Dabei darf das Glas nur <strong>einmal</strong> angesetzt werden – Nachkorrigieren ist nicht erlaubt.
+        </li>
+        <li>
+          <strong>Neues Gewicht einwiegen:</strong> Das Wiegen läuft ab wie zu Beginn. Bei NFC-Chips entfällt jedoch die erneute Zuweisung – einfach scannen, auf die Waage stellen und der Rest passiert automatisch.<br>
+          <strong>Wichtig:</strong> Scanne das nächste Getränk erst, nachdem das vorherige von der Waage genommen wurde!
+          <ul>
+            <li>Die Abweichung vom persönlichen Ziel wird direkt angezeigt: Ein <strong>negativer Wert</strong> bedeutet, der Schluck war zu klein; ein <strong>positiver Wert</strong> bedeutet, er war zu groß.</li>
+            <li>Sind alle Gewichte eingetragen, klickt auf <em>„Noch eine Runde“</em> (sofern alle noch genug im Glas haben) oder auf <em>„Beenden“</em>, um zum Endstand zu gelangen.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Rundenauswertung:</strong>
+          <ul>
+            <li>Die Person mit der größten Abweichung trinkt einen Strafschluck, die präziseste Person darf einen Schluck verteilen.</li>
+            <li>Bei einer Abweichung von nur <strong>1&nbsp;g</strong> müssen alle anderen einen Strafschluck trinken.</li>
+            <li><strong>Sonderfall 0&nbsp;g Abweichung („Bagel“):</strong> Ist diese Option aktiviert, greift stattdessen die Bagel-Regel (siehe unten).</li>
+          </ul>
+        </li>
+      </ol>
 
-  <h4>III. Endergebnisse</h4>
-  <p>
-    Auf dem Endbildschirm wird das Gesamtergebnis angezeigt, das sich nach verschiedenen Bewertungskriterien sortieren lässt. Anschließend kannst du den Spielstand optional per QR-Code direkt auf andere Smartphones übertragen (siehe Kapitel <em>XX</em>).
-  </p>
-
-  <h4 id="bagel">Bagel</h4>
-  <p>
-    Wer sein Ziel auf das Gramm genau trifft, darf eine Person auswählen, die ihr Getränk komplett austrinken (exen) muss:
-  </p>
-  <ol>
-    <li>Wähle die betroffene Person in der App aus.</li>
-    <li>Sie holt sich ein neues Getränk, wiegt es ein und du klickst auf <em>„Weiter“</em>.</li>
-    <li>Anschließend muss sie das neue Getränk auf das vorherige Fülllevel heruntertrinken (wird auf dem Bildschirm angezeigt).</li>
-    <li>Wiege das neue Gewicht ein und klicke auf <em>„Weiter“</em>.</li>
-  </ol>
-  <p>
-    <em>Hausregel-Tipp:</em> Liegt die aufzuholende Menge über 200&nbsp;g, darf einmal zwischengewogen werden.
-  </p>
-      
+      <h3 id="bagel">Bagel</h3>
+      <p>
+        Wer sein Ziel auf das Gramm genau trifft, darf eine Person auswählen, die ihr Getränk komplett austrinken (exen) muss:
+      </p>
+      <ol>
+        <li>Wähle die betroffene Person in der App aus.</li>
+        <li>Sie holt sich ein neues Getränk, wiegt es ein und du klickst auf <em>„Weiter“</em>.</li>
+        <li>Anschließend muss sie das neue Getränk auf das vorherige Fülllevel heruntertrinken (wird auf dem Bildschirm angezeigt).</li>
+        <li>Wiege das neue Gewicht ein und klicke auf <em>„Weiter“</em>.</li>
+      </ol>
+      <div class="note-box">
+        <p><strong>Hausregel-Tipp:</strong> Liegt die aufzuholende Menge über 200&nbsp;g, darf einmal zwischengewogen werden.</p>
+        <p style="margin-bottom: 0;"><strong>Hinweis:</strong> Diese Option lässt sich direkt zum Spielstart aktivieren bzw. deaktivieren. Außerdem lässt sich das Abspielen des „Bagel-Jingles“ in den Optionen einstellen (siehe <a href="#andere-optionen">Andere Optionen</a>).</p>
+      </div>
 
       <h3 id="items-modus">Items-Modus</h3>
       <p>
-        Erklärung der Spezial-Items, Modifikatoren und wie diese das Wiegen bzw. die Punktevergabe beeinflussen.
+        Der Items-Modus läuft grundsätzlich genauso ab wie der Standard-Modus, aber anstelle der verteilten Schlucke können „Items“ mit bestimmten Funktionen eingesetzt werden. 
+        Die Stärke der Items, ihre Wahrscheinlichkeit und Verteilung können direkt in der App eingesehen und bearbeitet werden.
       </p>
 
       <h2 id="ergebnis">Ergebnis</h2>
       <p>
-        Auswertung nach Abschluss einer Runde.
+        Nach dem Spiel wird der Endstand angezeigt. Hier kann man zwischen vier Wertungen wählen:
       </p>
+      <div class="ranking-modes">
+        <div class="ranking-mode" data-mode="Gesamt">
+          <h4>Klassisch</h4>
+          <p>Klassische Wertung aller Schlucke.</p>
+        </div>
+        <div class="ranking-mode" data-mode="OhneExxer">
+          <h4>Ohne Bagel</h4>
+          <p>Fehler durch Bagel werden ignoriert.</p>
+        </div>
+        <div class="ranking-mode" data-mode="OhneWorst">
+          <h4>Ohne max. Fehler</h4>
+          <p>Der schlechteste Schluck wird abgezogen (kann auch von einem Bagel stammen).</p>
+        </div>
+        <div class="ranking-mode" data-mode="Profi">
+          <h4>Ohne Bagel &amp; ohne max. Fehler</h4>
+          <p>Fehler durch Bagel sowie der schlechteste reguläre Schluck werden ignoriert.</p>
+        </div>
+      </div>
 
       <h3 id="rangliste">Rangliste</h3>
       <p>
-        Wie die Platzierungen berechnet und dauerhaft gespeichert werden.
+        Alle Spiele werden lokal gespeichert, um eine Rangliste zu generieren.
       </p>
 
       <h3 id="events">Events</h3>
       <p>
-        Besondere Ereignisse, Meilensteine oder Rekorde, die während des Spiels ausgelöst wurden.
+        Neben der All-Time-Bestenliste können auch einzelne, zeitlich begrenzte „Events“ erstellt werden – zum Beispiel für ein Festival.
       </p>
 
       <h2 id="ergebnisse-bearbeiten">Ergebnisse bearbeiten</h2>
       <p>
-        Nachträgliches Korrigieren von Werten, Spielernamen oder Löschen fehlerhafter Messungen.
+        Hier habt ihr die Möglichkeit, alle Ergebnisse im Nachhinein zu bearbeiten.
       </p>
 
       <h3 id="ergebnisse-teilen">Ergebnisse teilen</h3>
       <p>
-        Exportmöglichkeiten (z. B. als Bild, Link oder Text) für Messenger und Social Media.
+        Die Spieldaten werden nur lokal gespeichert. Wenn ihr trotzdem mit euren Freunden eine gemeinsame Bestenliste führen wollt, habt ihr zwei Möglichkeiten:
       </p>
+      <ol>
+        <li><strong>QR-Code:</strong> Ihr könnt einzelne Spiele via QR-Code übertragen (entweder direkt nach dem Spiel oder in der Ansicht <em>„Alle Spiele“</em>). Nutzt hierbei den web-internen QR-Code-Scanner (siehe <a href="#daten">Datenschutz</a>) im Event-Menü.</li>
+        <li><strong>CSV-Export/-Import:</strong> Ihr könnt auch alle Spiele gebündelt als CSV-Datei exportieren und wieder importieren. Dies erfolgt über die entsprechenden Buttons in der Ansicht <em>„Alle Spiele“</em>.</li>
+      </ol>
 
       <h2 id="andere-optionen">Andere Optionen</h2>
-      <p>
-        Weitere Einstellungen in der App (z. B. Einheiten, Soundeffekte, Dark Mode, Reset).
-      </p>
+      <ul>
+        <li><strong>Bluetooth:</strong> Einstellungen zur Kopplung (siehe Kapitel <a href="#waage-einrichten">Waage einrichten</a>).</li>
+        <li><strong>Spiel:</strong> Hier kannst du einstellen, ob der Bagel-Jingle abgespielt werden soll und ob die Spieler entsprechend ihrer Platzierung sortiert werden sollen (es kann sinnvoll sein, die Start- bzw. Sitzreihenfolge beizubehalten, wenn man die Gewichte manuell eingibt).</li>
+        <li><strong>Items:</strong> Hier kannst du die Eigenschaften der Items bearbeiten.</li>
+        <li><strong>Allgemein:</strong> Hier kannst du einstellen, ob das Handy vibrieren soll, wenn ein NFC-Chip erkannt wird, und ob die Warnung bei jedem App-Start angezeigt werden soll. Zudem kannst du einen lokalen Ordner auswählen, in dem Videos gespeichert sind, die beim Bagel-Jingle abgespielt werden sollen (standardmäßig ist ein einziges Video intern hinterlegt).</li>
+      </ul>
     </section>
 
     <!-- 3. Hardware -->
     <section id="hardware">
       <h1 class="section-h1">Hardware</h1>
       <p>
-        Aufbau und Komponenten der physischen Einheit.
+        Die App funktioniert auch „Standalone“, aber mit den richtigen Komponenten wird das Spielerlebnis deutlich fließender.
       </p>
 
       <h2 id="beschreibung">Beschreibung</h2>
       <p>
-        Die folgenden Items habe ich für die hier beschriebene Bauanleitung verwendet (Leider nicht als Link, da das sonst potentiell als Werbung gelten würden), du kannst natrülich auch eigene Varianten erschaffen. 
-        Nur bei der Waage ist es wichtig die richtige zu nehmen, da andere Bluetooth Waagen vermutlich nicht kompatibel sind.
-        Falls du eine andere Bluetooth-Waage hast, kontaktiere mich gerne und wir können versuchen eine App-Unterstützung zu implementieren.
-        <div class="my-6 overflow-x-auto rounded-lg border border-skin-line">
-  <div class="my-6 overflow-x-auto rounded-lg border border-skin-line">
-  <table class="w-full text-left border-collapse text-sm">
-    <thead class="bg-skin-card-muted border-b border-skin-line text-skin-base uppercase text-xs tracking-wider">
-      <tr>
-        <th class="py-3 px-4 font-semibold min-w-[130px] whitespace-nowrap border-r border-skin-line">Item</th>
-        <th class="py-3 px-4 font-semibold">Beschreibung</th>
-      </tr>
-    </thead>
-    <tbody class="divide-y divide-skin-line">
-      <tr class="hover:bg-skin-card/60 transition-colors">
-        <td class="py-3 px-4 font-medium min-w-[130px] whitespace-nowrap border-r border-skin-line">
-          Holzbox
-        </td>
-        <td class="py-3 px-4">Creative Deco A4 Wooden Box with Lid | 34 x 25.3 x 5.3 cm </td>
-      </tr>
-      <tr class="hover:bg-skin-card/60 transition-colors">
-        <td class="py-3 px-4 font-medium min-w-[130px] whitespace-nowrap border-r border-skin-line">
-          Gummi-Band
-        </td>
-        <td class="py-3 px-4">38mm (1.5 inch) Wide Flat Elastic Waistband Tape</td>
-      </tr>
-      <tr class="hover:bg-skin-card/60 transition-colors">
-        <td class="py-3 px-4 font-medium min-w-[130px] whitespace-nowrap border-r border-skin-line">
-          Bluetooth Waage
-        </td>
-        <td class="py-3 px-4">arboleaf Kitchen Scales with App and Calorie Counter USB 10 kg / 0.5 g </td>
-      </tr>
-      <tr class="hover:bg-skin-card/60 transition-colors">
-        <td class="py-3 px-4 font-medium min-w-[130px] whitespace-nowrap border-r border-skin-line">
-          Sticker
-        </td>
-        <td class="py-3 px-4">Velcro Tape Self-Adhesive Extra Strong 20 Pairs Round Velcro Dots Self-Adhesive 40 mm Black </td>
-      </tr>
-      <tr class="hover:bg-skin-card/60 transition-colors">
-        <td class="py-3 px-4 font-medium min-w-[130px] whitespace-nowrap border-r border-skin-line">
-          NFC Chips
-        </td>
-        <td class="py-3 px-4">NFC Stickers NFC Tags NFC Stickers On-Metal  Wichtig: Es müssen welche sein, die für „Stick on Metal“ geeignet sind.</td>
-      </tr>
-      <tr class="hover:bg-skin-card/60 transition-colors">
-        <td class="py-3 px-4 font-medium min-w-[130px] whitespace-nowrap border-r border-skin-line">
-         Saugnapf
-        </td>
-        <td class="py-3 px-4">Pack of 20 Suction Cups, Diameter 20 mm </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
+        Die folgenden Komponenten habe ich für die hier beschriebene Bauanleitung verwendet (leider ohne Direktlinks, da dies sonst potenziell als Werbung gelten würde). Du kannst natürlich auch eigene Varianten erschaffen.
       </p>
+      <div class="note-box">
+        <strong>Wichtig bei der Waage:</strong> Achte darauf, das kompatible Modell zu nehmen, da andere Bluetooth-Waagen vermutlich nicht unterstützt werden. Falls du eine andere Bluetooth-Waage hast, kontaktiere mich gerne und wir können versuchen, eine App-Unterstützung zu implementieren.
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Beschreibung / Modellbezeichnung</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Holzbox</strong></td>
+              <td>Creative Deco A4 Wooden Box with Lid | 34 x 25.3 x 5.3 cm</td>
+            </tr>
+            <tr>
+              <td><strong>Gummiband</strong></td>
+              <td>38 mm (1.5 inch) Wide Flat Elastic Waistband Tape</td>
+            </tr>
+            <tr>
+              <td><strong>Bluetooth-Waage</strong></td>
+              <td>arboleaf Kitchen Scales with App and Calorie Counter USB 10 kg / 0.5 g</td>
+            </tr>
+            <tr>
+              <td><strong>Sticker</strong></td>
+              <td>Velcro Tape Self-Adhesive Extra Strong – 20 Pairs Round Velcro Dots Self-Adhesive 40 mm Black</td>
+            </tr>
+            <tr>
+              <td><strong>NFC-Chips</strong></td>
+              <td>NFC Stickers / NFC Tags On-Metal <em>(Wichtig: Es müssen Chips sein, die für „Stick on Metal“ geeignet sind!)</em></td>
+            </tr>
+            <tr>
+              <td><strong>Klettband</strong></td>
+              <td>Klettband zum Nähen <em>(Wichtig: nicht selbstklebend!)</em></td>
+            </tr>
+            <tr>
+              <td><strong>Saugnapf</strong></td>
+              <td>Pack of 20 Suction Cups, Diameter 20 mm</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <h2 id="die-box">Die Box</h2>
       <p>
-        Informationen zum Gehäuse (z. B. 3D-Druck, Maße, Material und Montage).
+        Hier ist die Aufbewahrungsbox, die ich mir gebaut habe – sie kann euch als Ideengrundlage dienen. 
+        Im Folgenden beschreibe ich den Zusammenbau, falls ihr sie komplett oder in Teilen nachbauen wollt:
       </p>
+      <div class="media-placeholder">
+        [Platzhalter: Foto der fertigen Aufbewahrungsbox]
+      </div>
+      <ul>
+        <li>Klebt die Inlays / Halterungen entsprechend in die Holzbox, sodass Waage, Bänder und Saugnäpfe sicher verstaut sind. <em>(Anleitung hier ggf. noch vervollständigen)</em></li>
+      </ul>
 
       <h2 id="die-badges">Die Badges</h2>
       <p>
-        Übersicht über die physischen Badges/Marker und deren Einsatz.
+        Die Badges sind die Kombination aus NFC-Chip und einem Bild. Während die Chips notwendig für die NFC-Funktionen sind, sind die Bilder rein kosmetisch.
       </p>
 
       <h3 id="bilder">Bilder</h3>
+      <p>
+        <strong>Beschreibung:</strong> Obwohl nur rein kosmetischer Natur, ist es immer ein Spaß, sich für jede Runde einen neuen Badge auszusuchen und somit sein Getränk zu personalisieren. 
+        Die Bilder, die wir privat nutzen, sind potenziell urheberrechtlich geschützt, deswegen kann ich hier keine Beispiele zeigen. Alles aus der Popkultur – insbesondere Serien aus der Jugend – kommt bei mir im Freundeskreis aber immer gut an.
+      </p>
       <div class="media-placeholder">
-        [ Platzhalter für Fotos der Hardware, Box und Badges – hier &lt;img src="..."&gt; einfügen ]
+        [Hinweis: Keine Beispielbilder aus Urheberrechtsgründen]
       </div>
+      <p><strong>Anleitung:</strong></p>
+      <ol>
+        <li>Erstelle dir die gewünschten Bilder am PC (am besten rund und minimal größer als die 40-mm-Klett-Sticker).</li>
+        <li>Lass sie einfach bei einem Foto-Service ausdrucken und schneide sie aus.</li>
+        <li>Klebe die Bilder auf die runden Klett-Sticker aus der Liste.</li>
+      </ol>
 
       <h3 id="baender">Bänder</h3>
       <p>
-        Details zu den verwendeten Bändern/Befestigungen und deren Handhabung.
+        <strong>Beschreibung:</strong> Die Gummibänder können genutzt werden, um die Bilder und NFC-Chips an den meisten Flaschen, Dosen und Bechern zu befestigen. An sehr großen Krügen mit Henkel funktionieren sie nicht so gut.
       </p>
+      <div class="media-placeholder">
+        [Platzhalter: Foto der Gummibänder mit NFC-Chip und Klett]
+      </div>
+      <p><strong>Anleitung:</strong></p>
+      <ol>
+        <li>Schneide das Gummiband auf ca. 25&nbsp;cm Länge zu (die Enden am besten kurz mit einem Feuerzeug versiegeln, damit nichts ausfranst).</li>
+        <li>Nähe einen Streifen Klettband (achte darauf, das Gegenstück zu den Bildern zu nutzen) mit ca. 2,5&nbsp;cm Abstand zu einem der Enden auf das Band.</li>
+        <li>Lege das Band etwas gestrafft um eine normale Dose und markiere dir die Überlappung (oder nutze eine Stecknadel zum Fixieren).</li>
+        <li>Klebe den NFC-Chip mittig zwischen die sich überlappenden Enden – ungefähr unter das aufgenähte Klettband.</li>
+        <li>Vernähe die beiden Enden miteinander (achte darauf, den Chip dabei nicht zu beschädigen). Fertig!</li>
+      </ol>
+      <div class="note-box">
+        <strong>Hinweis:</strong> Viele Festivalbändchen haben mittlerweile einen NFC-Chip integriert, der ebenfalls funktioniert. Einfach den Chip auf ein etwas dünneres Gummiband ziehen und schon kann er direkt genutzt werden.
+      </div>
 
       <h3 id="saugnaepfe">Saugnäpfe</h3>
       <p>
-        Hinweise zur Befestigung auf glatten Oberflächen und zur optimalen Haftung.
+        <strong>Beschreibung:</strong> Die Saugnäpfe können genutzt werden, um die Bilder und NFC-Chips an den meisten Flaschen, Dosen und Krügen zu befestigen. Auf rauen Plastikbechern haften sie nicht so gut.
       </p>
-      
+      <div class="media-placeholder">
+        [Platzhalter: Foto der 3D-gedruckten Saugnapf-Halterung]
+      </div>
+      <p><strong>Anleitung:</strong></p>
+      <ol>
+        <li>Drucke das 3D-Modell aus: <a href="https://github.com/Zygon-Labs/alles-wiegen/blob/main/Saugnapf.stl" target="_blank" rel="noopener">Saugnapf.stl auf GitHub</a>.</li>
+        <li>Schiebe den gekauften Saugnapf in den dafür vorgesehenen Schlitz.</li>
+        <li>Klebe danach den NFC-Chip sowie die ungenutzte Seite der Klett-Sticker darauf. Fertig!</li>
+      </ol>
     </section>
+  
     <h2 id="daten">Datenschutz</h2>
       <p><strong>App:</strong> AllesWiegen &bull; <strong>Stand:</strong> November 2026</p>
 
